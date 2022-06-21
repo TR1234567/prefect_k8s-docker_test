@@ -8,5 +8,6 @@ def number_task():
     logger.info("Hello!")
     return 42
 
-runner = TaskRunner(task=number_task)
-state = runner.run()
+
+with  Flow("hello-flow") as flow 
+    f.add_task(number_task)
