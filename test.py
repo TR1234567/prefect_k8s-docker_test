@@ -15,10 +15,6 @@ def sum_numbers(y):
     return result
 
 
-## Imperative API
-flow = Flow("hello-flow")
-flow.set_dependencies(add_one, keyword_tasks={"x": [1, 2, 3, 4]}, mapped=True)
-flow.set_dependencies(sum_numbers, keyword_tasks={"y": add_one})
 
 ## Functional API
 with Flow("hello-flow") as flow:
