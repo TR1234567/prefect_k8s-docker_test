@@ -20,3 +20,6 @@ def sum_numbers(y):
 with Flow("hello-flow") as flow:
     mapped_result = add_one.map(x=[1, 2, 3, 4])
     summed_result = sum_numbers(mapped_result)
+
+
+flow.run()
