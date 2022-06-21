@@ -8,6 +8,6 @@ def plus_one(x):
     logger.info("test1")
     return x + 1
 
-with Flow("flow") as flow:
+with Flow("hello-flow") as flow:
     # image="test"))
     plus_one(1)
