@@ -1,9 +1,12 @@
+from prefect import task
+from prefect.engine import TaskRunner
 
-import prefect
-from prefect import task, Flow
 
 @task
-my_shell = ShellTask(shell="bash")
+def number_task():
+    logger = prefect.context["logger"]
+    logger.info("Hello!")
+    return 42
 
-with Flow("hello-flow") as flow:
-    task1 = my_shell(command="ls")
+runner = TaskRunner(task=number_task)
+state = runner.run()
