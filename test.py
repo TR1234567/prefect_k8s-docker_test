@@ -16,11 +16,11 @@ def sum_numbers(y):
 
 
 ## Imperative API
-flow = Flow("Map Reduce")
+flow = Flow("hello-flow")
 flow.set_dependencies(add_one, keyword_tasks={"x": [1, 2, 3, 4]}, mapped=True)
 flow.set_dependencies(sum_numbers, keyword_tasks={"y": add_one})
 
 ## Functional API
-with Flow("Map Reduce") as flow:
+with Flow("hello-flow") as flow:
     mapped_result = add_one.map(x=[1, 2, 3, 4])
     summed_result = sum_numbers(mapped_result)
