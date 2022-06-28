@@ -1,24 +1,21 @@
 from prefect.run_configs import KubernetesRun
-from prefect.storage import GitHub
+from prefect.storage import Local
 
 from prefect import Flow, Parameter, task, context
 
-STORAGE = GitHub(
-    repo="TR1234567/prefect_k8s-docker_test",
-    path=f"flow-of-flow/workflow/kubetest.py"
-)
+
 
 @task
 def hello():
-    logger = context.get("logger")
-    logger.info("Hello kube!")
+    return '1'
 
-with Flow("flow-of-flow",storage=STORAGE,
-        run_config = KubernetesRun(image="tr1234567/wf-test")) as flow:
+with Flow("flow-of-flow",storage=Local(path='app/workflow/kubetest.py'),
+        run_config = KubernetesRun(image="tr1234567/wf-test",labels=[])) as flow:
     logger = context.get("logger")
     logger.info("start workflow")
-    hello()
+    r = hello()
+    logger.info(r"Hello kube {}".format(r))
     logger.info("End")
 
-flow.register(project_name="flow-of-flow")
+flow.register(project_name="flow-kube")
     
