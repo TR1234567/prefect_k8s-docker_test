@@ -1,13 +1,16 @@
 from prefect import Flow, Parameter, task, context
 from prefect.tasks.prefect import create_flow_run, wait_for_flow_run
 from prefect.run_configs import KubernetesRun
-from prefect.storage import Local
+from prefect.storage import Github
 import sys
 sys.path.append('./')
 from component import *
 from prefect import Parameter
 
-
+STORAGE = GitHub(
+    repo="TR1234567/prefect_k8s-docker_test",
+    path=f"flow-of-flow/workflow/{FLOW_NAME}.py"
+)
 
 @task
 def plus_show(x,y):
@@ -18,7 +21,7 @@ def plus_show(x,y):
     return r
     
 
-with Flow("flow-of-flow",storage=Local(path="/app/workflow/flow.py",stored_as_script=True),run_config = KubernetesRun(image="flow-of-flow")) as flow:
+with Flow("flow-of-flow",storage=Local(path=STORAGE,stored_as_script=True),run_config = KubernetesRun(image="flow-of-flow")) as flow:
     print('start workflow')
     logger = context.get("logger")
     fl1 = create_flow_run(flow_name="flow-of-flow1")
