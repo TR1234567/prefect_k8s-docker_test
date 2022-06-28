@@ -22,7 +22,7 @@ def plus_show(x,y):
     
 
 with Flow("flow-of-flow",storage=STORAGE,
-        run_config = KubernetesRun(image="tr1234567/wf-test:lastest")) as flow:
+        run_config = KubernetesRun(image="tr1234567/wf-test")) as flow:
     print('start workflow')
     logger = context.get("logger")
     fl1 = create_flow_run(flow_name="flow-of-flow1")

@@ -16,7 +16,7 @@ class sent_number(Task):
 s = sent_number()
 with Flow("flow-of-flow2"
         ,storage=STORAGE
-        ,run_config = KubernetesRun(image="tr1234567/wf-test:lastest")) as flow:
+        ,run_config = KubernetesRun(image="tr1234567/wf-test")) as flow:
     print('start workflow')
     s1 = s()
 
